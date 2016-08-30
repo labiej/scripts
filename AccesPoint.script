@@ -1,0 +1,58 @@
+#!/bin/sh
+# Script to start/stop a hostapd-based access point
+#
+# Symbols for needed programs
+
+IPTABLES=/usr/sbin/iptables
+IFCONFIG=/sbin/ifconfig
+DHCPD=/usr/sbin/dhcpd
+HOSTAPD=/usr/local/bin/hostapd
+
+# Symbols for internal and external interfaces
+
+NET_INT=wlp3s0
+NET_EXT=enp2s0
+
+# IP address for the AP
+
+INT_ADDR=192.168.0.1
+
+case "$1" in
+    start)
+        echo "Starting AP mode for $NET_INT at address $INT_ADDR"
+        # Disable packet forwarding
+        echo 0 > /proc/sys/net/ipv4/ip_forward
+        # Stop any existing hostapd and dhcpd daemons
+        killproc hostapd
+        killproc dhcpd
+        #Set up forwarding
+        $IPTABLES -t nat -A POSTROUTING -o $NET_EXT -j MASQUERADE
+        $IPTABLES -A FORWARD -i $NET_EXT -o $NET_INT -m state \
+            --state RELATED,ESTABLISHED -j ACCEPT
+        $IPTABLES -A FORWARD -i $NET_INT -o $NET_EXT -j ACCEPT
+        # Enable packet forwarding
+        echo 1 > /proc/sys/net/ipv4/ip_forward
+        # Get the internal interface in the right state
+        $IFCONFIG $NET_INT down
+        $IFCONFIG $NET_INT up
+        $IFCONFIG $NET_INT $INT_ADDR
+        # dhcpd needs to have a leases file available - create it if needed
+        if [ ! -f /var/lib/dhcp/db/dhcpd.leases ]; then
+            touch /var/lib/dhcp/db/dhcpd.leases
+        fi
+        # Bring up the DHCP server
+        $DHCPD -cf /root/dhcpd.conf $NET_INT
+        # Bring up hostapd
+        $HOSTAPD -B /root/hostapd.conf
+        ;;
+    stop)
+        echo "Stopping AP mode on $NET_INT"
+        # Stop hostapd and dhcpd daemons
+        killproc hostapd
+        killproc dhcpd
+        ;;
+    *)
+        echo "Usage: $0 {start|stop}"
+        exit 1
+        ;;
+esac
