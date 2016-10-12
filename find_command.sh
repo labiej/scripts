@@ -10,6 +10,9 @@
 numargs=$#
 HISTFILE=~/.bash_history
 
+KRUNNER=~/.config/krunnerrc
+
+
 
 if [ $numargs -eq 0 ]
 then
@@ -24,23 +27,30 @@ if [ $numargs -eq 2 ] && [ $2 -ge 1 ]
 then
 
     results="$(grep -n $phrase $HISTFILE  |  tail -n $2)"
-
 else
 
     results="$(grep -n $phrase $HISTFILE)"
-
 fi
 
-echo -e $(printf "%q" "$results")
+echo -e `printf "%q" "$results"`
 
 
 read -r -p "Which line contains your desired command? (use a letter to quit)`echo $'\n> '`" linenumber
 
-echo "Copying command to clipboard\n"
+# Check input
+
+re=^[0-9]+$
+if ! [[ $linenumber =~ $re  ]] ; then
+    echo "Exit without copying command" >&2;
+    exit 1
+elif [ $(echo "$results" | grep /^"$linenumber"\s+/ | wc -l) -eq 0  ]
+then
+    echo "Invalid line number, try again" >&2;
+    exit 1
+fi
+
+echo "Copying command to clipboard"
 
 echo `sed "${linenumber}q;d" $HISTFILE`
 
 sed "${linenumber}q;d" $HISTFILE | tr -d '\n' | xclip -selection clipboard
-
-
-#
