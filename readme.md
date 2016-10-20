@@ -8,6 +8,21 @@ This repository contains some scripts I regularly use. Below I'll list their pur
 Useful to turn a computers wifi card into an access point for other mobile devices. My usage was limited to construct a local wifi network for my smartphone, effectively sharing the ethernet connection
 * __alarm.sh__
 Using linux' rtcwake command I used my laptop as an alarm clock for a while. It wakes up at a specified time and plays a random song from the music folder.
+* __bulkRename.sh__
+My digital camera uses JPG as extension for pictures. Since all extensions should be lowercase if you ask me I decided to build a bulk renaming tool.
+I expanded the use to any extension that can be converted to whatever you like (statically).
+
+With a single argument the extension will be changed to lowercase while two arguments allow more general constructions.
+Original usage
+```
+./bulkRename.sh JPG
+```
+or its equivalent
+```
+./bulkRename.sh JPG jpg
+```
+
+The expanded script allows for changing more annoying extensions like `.text` to `.txt`.
 * __find_command.sh__
 One of the more useful scripts for searching the history of your terminal. Several options keep the output tractable.
 * __mplayerWrapper.sh__
