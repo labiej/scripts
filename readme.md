@@ -85,42 +85,33 @@ Usage
 
         -   Task
 
-        Monday
+    Monday
 
-            -   Task 1
-                -   Task 2
+        -   Task 1
+        -   Task 2
 
-                Tuesday
+    Tuesday
 
-                    -   Task 1
-                        -   Task 2
+        -   Task 1
+        -   Task 2
 
-                        Wednesday
+    Wednesday
 
-                            -   Task 1
-                                -   Task 2
+        -   Task 1
+        -   Task 2
 
-                                Thursday
+    Thursday
 
-                                    -   Task 1
-                                        -   Task 2
+        -   Task 1
+        -   Task 2
 
-                                        Friday
+    Friday
 
-                                            -   Task 1
-                                                -   Task 2
+        -   Task 1
+        -   Task 2
 
-                                                Saturday
+    Saturday
 
-                                                    -   Task 1
-                                                        -   Task 2
-                                                        ```
-                                                         
-                                                        ```
-   ```
-   ```
-  ```
-  ```
- ```
- ```
+        -   Task 1
+        -   Task 2
 ```
