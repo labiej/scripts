@@ -43,75 +43,75 @@ Since it uses the `date` command you'll want to be careful when you run the scri
 This script takes one mandatory argument, a part of a command you can't quite remember.
 Usage
 ```
- ./find_command.sh "search string"
- ```
+./find_command.sh "search string"
+```
 
- In this usage it'll print out all commands in your bash history containing "search string" together with its linenumber in said history file. Next it requires user input specifying which command you are looking for. If you give a non-numeric value you'll exit the script.
+In this usage it'll print out all commands in your bash history containing "search string" together with its linenumber in said history file. Next it requires user input specifying which command you are looking for. If you give a non-numeric value you'll exit the script.
 
- The script also assumes that any number not matching the line numbers in the results is a mistake and exits as well.
+The script also assumes that any number not matching the line numbers in the results is a mistake and exits as well.
 
- If the number is valid it will print the command once more and copy it to the clipboard.
+If the number is valid it will print the command once more and copy it to the clipboard.
 
- The second optional argument limits the number of results listed. This is useful when looking for a very common string while you know you ran the command you're looking for recently. It then only prints the last `n` commands containing search string.
- Usage
- ```
-  ./find_command.sh "search string" n
-  ```
+The second optional argument limits the number of results listed. This is useful when looking for a very common string while you know you ran the command you're looking for recently. It then only prints the last `n` commands containing search string.
+Usage
+```
+./find_command.sh "search string" n
+```
 
-  ### mplayerWrapper.sh
+### mplayerWrapper.sh
 
-  Takes a single argument, the directory containing music you want to play as a shuffled playlist. Starts mplayer in slave mode listening to commands passed through a fifo which can be set up in the `pipe` variable of the script.
+Takes a single argument, the directory containing music you want to play as a shuffled playlist. Starts mplayer in slave mode listening to commands passed through a fifo which can be set up in the `pipe` variable of the script.
 
-  ### pdfextractor.sh
+### pdfextractor.sh
 
-  Takes 3 mandatory arguments.
-  The usage is self explanatory
-  ```
-   ./pdfextractor.sh start end file.pdf
-   ```
+Takes 3 mandatory arguments.
+The usage is self explanatory
+```
+./pdfextractor.sh start end file.pdf
+```
 
-   This will create a pdf file starting at page "start" and ending at page "end" from the original file `file.pdf`. The output file is `file_p{start}-p{end}.pdf`.
+This will create a pdf file starting at page "start" and ending at page "end" from the original file `file.pdf`. The output file is `file_p{start}-p{end}.pdf`.
 
-   ### swapUsage.sh
+### swapUsage.sh
 
-   Runs out-of-the-box, credits go to Erik Ljungstrom, Mikko Rantalainen and Mark Methot.
+Runs out-of-the-box, credits go to Erik Ljungstrom, Mikko Rantalainen and Mark Methot.
 
-   ### todo.sh
+### todo.sh
 
-   This script only needs to be set up. Inside the script you specify the location of the to-do list.
-   The to-do list will look something like
-   ```
-    Sunday
+This script only needs to be set up. Inside the script you specify the location of the to-do list.
+The to-do list will look something like
+```
+Sunday
 
-        -   Task
+-   Task
 
-    Monday
+Monday
 
-        -   Task 1
-        -   Task 2
+-   Task 1
+-   Task 2
 
-    Tuesday
+Tuesday
 
-        -   Task 1
-        -   Task 2
+-   Task 1
+-   Task 2
 
-    Wednesday
+Wednesday
 
-        -   Task 1
-        -   Task 2
+-   Task 1
+-   Task 2
 
-    Thursday
+Thursday
 
-        -   Task 1
-        -   Task 2
+-   Task 1
+-   Task 2
 
-    Friday
+Friday
 
-        -   Task 1
-        -   Task 2
+-   Task 1
+-   Task 2
 
-    Saturday
+Saturday
 
-        -   Task 1
-        -   Task 2
+-   Task 1
+-   Task 2
 ```
