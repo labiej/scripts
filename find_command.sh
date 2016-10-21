@@ -43,7 +43,7 @@ re=^[0-9]+$
 if ! [[ $linenumber =~ $re  ]] ; then
     echo "Exit without copying command" >&2;
     exit 1
-elif [ $(echo "$results" | grep /^"$linenumber"\s+/ | wc -l) -eq 0  ]
+elif [ $results =~ .*${linenumber}.* ]
 then
     echo "Invalid line number, try again" >&2;
     exit 1
